@@ -52,7 +52,7 @@ int recuperaElemento(Matriz* mat, int linha, int coluna){
     printf("%i\n", (*mat).mat[linha][coluna]);
         }
 return (*mat).mat[linha][coluna];
-}
+}Matriz* multi;
 
 int recuperaNColunas (Matriz* mat){
   return 0;
@@ -83,14 +83,14 @@ return trans;
 }
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
   int i, j, k;
-  Matriz* multi;
+  Matriz* multi = inicializaMatriz((*mat1).nlinha, (*mat2).ncoluna);
   if((*mat1).mat == NULL){
     printf("Matriz 1 nao exite.");
     exit(1);
   }else if((*mat2).mat == NULL){
     printf("Matriz 2 nao exite.");
     exit(1);
-  }else if ((*mat1).ncoluna == (*mat2).nlinha){
+  }else if ((*mat1).ncoluna != (*mat2).nlinha){
         printf("As matrizes nao sao validas para multiplicacao\n");
   }else{
       for(i = 0; i < (*mat2).nlinha; i++){
@@ -101,7 +101,7 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
         }
       }
   }
-return (*multi).mat;
+return multi;
 
 }
 void imprimeMatriz(Matriz* mat){
