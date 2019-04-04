@@ -48,9 +48,9 @@ int recuperaElemento(Matriz* mat, int linha, int coluna){
     printf("Linha ou coluna invalida\n");
   } else if (linha < 0 || coluna < 0){
       printf("Linha ou coluna invalida\n");
-  }
-
-printf("%i\n", (*mat).mat[linha][coluna]);
+  }else{
+    printf("%i\n", (*mat).mat[linha][coluna]);
+        }
 return (*mat).mat[linha][coluna];
 }
 
@@ -62,10 +62,47 @@ int recuperaNLinhas (Matriz* mat){
 }
 
 Matriz* transposta (Matriz* mat){
-  return 0;
+
+    int i, j;
+    Matriz* trans;
+    trans = inicializaMatriz((*mat).ncoluna, (*mat).nlinha);
+    if((*mat).mat == NULL){
+      printf("Matriz nao exite.");
+      exit(1);
+    }
+
+    for(i = 0; i < (*mat).ncoluna; i++){
+      for(j = 0; j < (*mat).nlinha; j++){
+        (*trans).mat[i][j] = (*mat).mat[j][i];
+      }
+    }
+
+return trans;
+
+
 }
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
- return NULL;
+  int i, j, k;
+  Matriz* multi;
+  if((*mat1).mat == NULL){
+    printf("Matriz 1 nao exite.");
+    exit(1);
+  }else if((*mat2).mat == NULL){
+    printf("Matriz 2 nao exite.");
+    exit(1);
+  }else if ((*mat1).ncoluna == (*mat2).nlinha){
+        printf("As matrizes nao sao validas para multiplicacao\n");
+  }else{
+      for(i = 0; i < (*mat2).nlinha; i++){
+        for(j = 0; j < (*mat1).ncoluna; j++){
+          for (k=0; k<(*mat1).ncoluna; k++) {
+           (*multi).mat[i][j] = (*multi).mat[i][j] + ((*mat1).mat[i][k] * (*mat2).mat[k][j]);
+          }
+        }
+      }
+  }
+return (*multi).mat;
+
 }
 void imprimeMatriz(Matriz* mat){
   int i, j;
