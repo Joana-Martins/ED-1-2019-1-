@@ -10,13 +10,20 @@ typedef struct matriz {
 }Matriz;
 
 Matriz* inicializaMatriz (int nlinhas, int ncolunas){
+  int i;
   Matriz *mat = ( Matriz*) malloc (sizeof(Matriz));
   mat -> nlinha = nlinhas;
   mat -> ncoluna = ncolunas;
   mat -> mat = (int**)malloc(nlinhas*sizeof(int*));
-  for(int i = 0 ; i < nlinhas; i++){
+  for(i = 0 ; i < nlinhas; i++){
     mat -> mat[i] = (int*) malloc(ncolunas*sizeof(int));
   }
+  for(i = 0; i < nlinhas; i++){
+    for(int j = 0; j < ncolunas;j++){
+      mat -> mat[i][j] = 0;
+    }
+  }
+
   return mat;
 }
 
@@ -55,10 +62,18 @@ return (*mat).mat[linha][coluna];
 }Matriz* multi;
 
 int recuperaNColunas (Matriz* mat){
-  return 0;
+    if((*mat).mat == NULL){
+      printf("Matriz nao exite.");
+      exit(1);
+    }
+return (*mat).ncoluna;
 }
 int recuperaNLinhas (Matriz* mat){
-  return 0;
+  if((*mat).mat == NULL){
+    printf("Matriz nao exite.");
+    exit(1);
+  }
+  return (*mat).nlinha;
 }
 
 Matriz* transposta (Matriz* mat){
@@ -119,9 +134,25 @@ void imprimeMatriz(Matriz* mat){
   }
 }
 void destroiMatriz(Matriz* mat){
-
+  for(int i = 0; i < (*mat).ncoluna; i++){
+    free((*mat).mat[i]);
+  }
+  free((*mat).mat);
+  free(mat);
 }
 
 void giraMatriz(Matriz* mat){
+  int N = (*mat).ncoluna;
 
+  for (int x = 0; x < N / 2; x++)
+    {
+        for (int y = x; y < N-x-1; y++)
+        {
+            int temp = (*mat).mat[x][y];
+            (*mat).mat[x][y] = (*mat).mat[y][N-1-x];
+            (*mat).mat[y][N-1-x] = (*mat).mat[N-1-x][N-1-y];
+            (*mat).mat[N-1-x][N-1-y] = (*mat).mat[N-1-y][x];
+            (*mat).mat[N-1-y][x] = temp;
+        }
+    }
 }
