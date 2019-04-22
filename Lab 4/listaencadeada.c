@@ -39,6 +39,11 @@ void Retira(int codigo, TipoLista *Lista, Produto *Item){
         q = q -> Prox;
       }
 
+      *item = p -> item;
+      q -> prox = p -> prox;
+
+
+
 }
 void ImprimeLista(TipoLista Lista){
 
