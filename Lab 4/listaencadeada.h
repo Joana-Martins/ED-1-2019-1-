@@ -21,7 +21,7 @@ typedef struct TipoCelula {
 } TipoCelula;
 
 typedef struct {
-  TipoApontador Primeiro, Ultimo;
+  TipoApontador primeiro, ultimo;
 } TipoLista;
 
 
@@ -40,7 +40,6 @@ TipoApontador BuscaCodigo(int codigo, TipoLista *Lista);
 /*Retira um elemento da lista */
 void Retira(int codigo, TipoLista *Lista, Produto *Item);
 
-
 /*Imprime a lista */
 void ImprimeLista(TipoLista Lista);
 
@@ -48,7 +47,7 @@ void ImprimeLista(TipoLista Lista);
 int Quantidade(TipoLista Lista);
 
 /**FUNCOES OPACAS DO STRUCT PRODUTO **/
-Produto  criaProduto(int cod, char *nome, int qtd, float preco);
+Produto criaProduto(int cod, char *nome, int qtd, float preco);
 
 void ImprimeProduto(Produto p);
 
