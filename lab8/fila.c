@@ -20,7 +20,7 @@ Pessoa* retira (Fila* f){
   Pessoa *aux, *retirada;
 
   if( f == NULL){
-    return;
+    return NULL;
   }
 
   while(!vazia_pilha(f -> pilha)){
@@ -48,7 +48,7 @@ void imprime_fila (Fila* f){
 
   imprime_pilha(f -> aux);
 
-  while(!vazia_pilha(f -> pilha)){
+  while(!vazia_pilha(f -> aux)){
     aux = pop(f -> aux);
     push(aux, f -> pilha);
   }
@@ -57,7 +57,7 @@ void imprime_fila (Fila* f){
 
 int Vazia_fila (Fila* f){
   if(f == NULL){
-    return;
+    return 2;
   }
   if(vazia_pilha(f -> pilha)){
     return 1;
@@ -67,7 +67,19 @@ int Vazia_fila (Fila* f){
 }
 
 void separa_filas (Fila* f, Fila* f_maiores, Fila* f_menores){
+  Pessoa *aux;
+  if(f == NULL){
+    return;
+  }
 
+  while(!vazia_pilha(f -> pilha)){
+    aux = pop(f -> pilha);
+    if(retorna_idade(aux) >= 60){
+      insere(aux, f_maiores);
+    }else{
+      insere(aux, f_menores);
+    }
+  }
 }
 
 Fila* destroi_fila (Fila* f){

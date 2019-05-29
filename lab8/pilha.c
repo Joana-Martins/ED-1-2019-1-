@@ -44,7 +44,7 @@ Pessoa* pop(Pilha* pilha){
    Pessoa* p;
 
    if (vazia_pilha (pilha))
-		return;
+		return NULL;
 	else {
 		p = pilha->vet[pilha->topo-1];
 		pilha->topo--;
@@ -62,10 +62,10 @@ void destroi_pessoa(Pessoa* p){
 
 Pilha* destroi_pilha(Pilha* pilha){
   while (!vazia_pilha(pilha)){
-          
+
    destroi_pessoa(pop(pilha));
   }
-  free(pilha); 
+  free(pilha);
   return NULL;
 }
 
@@ -93,7 +93,7 @@ Pessoa* inicializaPessoa(char* nome, int idade, char* endereco){
 /*Imprime os dados de todos os alunos da lista
 * inputs: a lista de alunos
 * output: nenhum
-* pre-condicao: lista não é nula
+* pre-condicao: lista nï¿½o ï¿½ nula
 * pos-condicao: dados dos alunos impressos na saida padrao
 */
 void imprime_pilha (Pilha* pilha){
@@ -120,10 +120,3 @@ void imprimepessoa(Pessoa* p){
 int retorna_idade (Pessoa* p){
     return p->idade;
 }
-   
-
-
-
-
-
-
