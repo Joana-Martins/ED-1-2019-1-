@@ -14,30 +14,29 @@ Pilha* cria_pilha(){
 
 
 void push (int n, Pilha* pilha){
-  Celula *aux;
-  aux =malloc(sizeof(Celula));
   if(pilha == NULL){
     printf("Pilha inválida. Error.\n");
     exit(0);
   }
+  Celula *aux;
+  aux =malloc(sizeof(Celula));
 
   pilha->Topo->Item = n;
 	aux->Prox = pilha->Topo;
 	pilha->Topo = aux;
 	pilha->tamanho++;
+  free(aux);
 }
 
-void pop(Pilha* pilha, int *item){
-  Celula* q;
-  q = malloc(sizeof(Celula));
+void pop(Pilha* pilha, int item){
   if(pilha -> Fundo == pilha -> Topo){
     printf("Erro! Lista vazia\n");
     return;
   }
-
-  q = pilha -> Topo;
-  pilha -> Topo = q -> Prox;
-  *item = q -> Prox -> Item;
+  Celula* q;
+  q = pilha -> Topo -> Prox;
+  pilha -> Topo -> Prox = q -> Prox;
+  item = q -> Prox -> Item;
   free(q);
   pilha -> tamanho--;
 }
@@ -51,22 +50,42 @@ void imprime_pilha(Pilha *pilha){
 		printf ("%d\n", Aux->Item);
 		Aux = Aux->Prox;
 	}
+  free(Aux);
 }
 
 Pilha* destroi_pilha(Pilha* pilha){
-  Pilha* aux = pilha;
-  Pilha * aux2;
+  Celula* aux2, *aux;
+  aux = pilha -> Fundo -> Prox;
   while (aux != NULL){
     aux2 = aux;
-    aux = aux -> Prox;
     free(aux2);
+    aux = aux2 -> Prox;
   }
-  free(aux2);
-  free)(pilha);
+  free(pilha);
   return NULL;
 }
 
 
 void adicao_pilha(Pilha *pilha){
-  pilha -> prox -> prox -> item = pilha ->  prox -> item + pilha
+  pilha -> Topo -> Prox ->Prox -> Item = pilha -> Topo ->  Prox -> Item + pilha-> Topo ->Prox->Prox->Item;
+  pop(pilha, pilha -> Topo -> Prox->Prox->Item);
+
+}
+
+void div_pilha(Pilha *pilha){
+  pilha -> Topo -> Prox ->Prox -> Item = pilha -> Topo ->  Prox -> Item / pilha-> Topo ->Prox->Prox->Item;
+  pop(pilha, pilha -> Topo -> Prox->Prox->Item);
+
+}
+
+void sub_pilha(Pilha *pilha){
+  pilha -> Topo -> Prox ->Prox -> Item = pilha -> Topo ->  Prox -> Item - pilha-> Topo ->Prox->Prox->Item;
+  pop(pilha, pilha -> Topo -> Prox->Prox->Item);
+
+}
+
+void multi_pilha(Pilha *pilha){
+    pilha -> Topo -> Prox ->Prox -> Item = pilha -> Topo ->  Prox -> Item * pilha-> Topo ->Prox->Prox->Item;
+    pop(pilha, pilha -> Topo -> Prox->Prox->Item);
+
 }

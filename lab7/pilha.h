@@ -43,7 +43,7 @@ void push(int n, Pilha *pilha);
 * pre-condicao: Pilha n�o � nula e n�o � vazia
 * pos-condicao: pilha n�o cont�m o elemento retirado do topo
 */
-void pop(Pilha* pilha, int *item);
+void pop(Pilha* pilha, int i);
 
 
 /*Imprime as pessoas da pilha
@@ -63,6 +63,10 @@ void imprime_pilha (Pilha* pilha);
 */
 Pilha* destroi_pilha(Pilha* pilha);
 
+void adicao_pilha(Pilha *pilha);
+void div_pilha(Pilha *pilha);
+void sub_pilha(Pilha *pilha);
+void multi_pilha(Pilha *pilha);
 
 
 #endif /* PILHA_H_ */
