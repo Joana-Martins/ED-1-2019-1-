@@ -24,15 +24,16 @@ int insere_ArvBin(ArvBin* raiz, int valor){
 }
 
 int consulta_ArvBin(ArvBin *raiz, int valor){
-  if(estaVazia_ArvBin(raiz)){
+  if(estaVazia_ArvBin(raiz)==0){
     return 0;
-  }else{
+  }
     if(valor < (*raiz)->info){
       return consulta_ArvBin(&(*raiz)->esq,valor);
-    }else if(valor > (*raiz) -> info){
+    }
+    if(valor > (*raiz) -> info){
       return consulta_ArvBin(&(*raiz)->dir,valor);
     }
-  }
+return 1;
 }
 
 int estaVazia_ArvBin(ArvBin *raiz){
