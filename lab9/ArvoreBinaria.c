@@ -2,15 +2,16 @@
 
 ArvBin* cria_ArvBin(){
   ArvBin* raiz = (ArvBin*)malloc(sizeof(ArvBin));
-  if(raiz != NULL){
-    *raiz = NULL;
-  }
+  *raiz = NULL;
+
   return raiz;
 }
 
 int insere_ArvBin(ArvBin* raiz, int valor){
   if(*raiz == NULL){
-    *raiz = malloc(sizeof(ArvBin));
+    *raiz = malloc(sizeof(struct NO));
+    (*raiz) -> dir = NULL;
+    (*raiz) -> esq = NULL;
     (*raiz) -> info = valor;
   }
   if(valor < (*raiz) -> info){
@@ -43,25 +44,38 @@ int estaVazia_ArvBin(ArvBin *raiz){
 }
 
 int totalNaoFolha_Arvbin(ArvBin *raiz){
-
+  if(*raiz == NULL){
+    return 0;
+  }
+  if((*raiz)->esq != NULL || (*raiz)->dir != NULL){
+    return totalNaoFolha_Arvbin(&((*raiz) -> esq)) + totalNaoFolha_Arvbin(&((*raiz) -> dir)) + 1;
+  }
 }
 
 int totalFolha_Arvbin(ArvBin *raiz){
+  if(*raiz == NULL){
+    return 0;
+  }
 
+  if((*raiz)->esq == NULL && (*raiz)->dir == NULL){
+    return 1;
+  }
+
+  return totalFolha_Arvbin(&(*raiz) -> esq) + totalFolha_Arvbin(&(*raiz) -> dir);
 }
 
 int totalNO_ArvBin(ArvBin *raiz){
-
+  return totalFolha_Arvbin(raiz) + totalNaoFolha_Arvbin(raiz);
 }
 
 void preOrdem_ArvBin(ArvBin *raiz){
-  if(raiz == NULL){
+  if(*raiz == NULL){
     return;
   }
   if(*raiz != NULL){
     printf("%i ", (*raiz) -> info);
-    emOrdem_ArvBin(&((*raiz)->esq));
-    emOrdem_ArvBin(&((*raiz)->dir));
+    preOrdem_ArvBin(&((*raiz)->esq));
+    preOrdem_ArvBin(&((*raiz)->dir));
   }
 }
 
@@ -77,12 +91,12 @@ void emOrdem_ArvBin(ArvBin *raiz){
 }
 
 void posOrdem_ArvBin(ArvBin *raiz){
-  if(raiz == NULL){
+  if(*raiz == NULL){
     return;
   }
   if(*raiz != NULL){
-    emOrdem_ArvBin(&((*raiz)->esq));
-    emOrdem_ArvBin(&((*raiz)->dir));
+    posOrdem_ArvBin(&((*raiz)->esq));
+    posOrdem_ArvBin(&((*raiz)->dir));
     printf("%i ", (*raiz) -> info);
   }
 }
@@ -98,7 +112,7 @@ void libera_NO(struct NO* no){
 }
 
 void libera_ArvBin(ArvBin *raiz){
-  if(raiz == NULL){
+  if(*raiz == NULL){
     return;
   }
   libera_NO(*raiz);

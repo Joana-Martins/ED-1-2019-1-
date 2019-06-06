@@ -9,7 +9,7 @@ Contem um inteiro e dois apontadores (esquerda/direita)
 
 struct NO{
   int info ;
-  struct NO*esq;
+  struct NO *esq;
   struct NO *dir;
 };
 
